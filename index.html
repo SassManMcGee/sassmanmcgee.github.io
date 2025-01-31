@@ -16,7 +16,11 @@
     <input type="text" id="baseUrl" placeholder="Enter Base URL" value="https://example.com"><br>
     <input type="text" id="param1" placeholder="Parameter 1"><br>
     <input type="text" id="param2" placeholder="Parameter 2"><br>
-    <input type="text" id="param3" placeholder="Parameter 3"><br>
+    
+    <!-- Toggle Button for Param3 -->
+    <button id="toggleParam3" class="toggle-btn" onclick="toggleParam3()">TUG</button>
+    <input type="hidden" id="param3" value="TUG"><br>
+
     <input type="text" id="param4" placeholder="Parameter 4"><br>
     <input type="text" id="param5" placeholder="Parameter 5"><br>
     <input type="text" id="param6" placeholder="Parameter 6"><br>
@@ -26,6 +30,20 @@
     <p id="output">Generated URL will appear here...</p>
 
     <script>
+
+        function toggleParam3() {
+            const button = document.getElementById("toggleParam3");
+            const hiddenInput = document.getElementById("param3");
+
+            if (hiddenInput.value === "TUG") {
+                hiddenInput.value = "4BS";
+                button.innerText = "4BS";
+            } else {
+                hiddenInput.value = "TUG";
+                button.innerText = "TUG";
+            }
+        }
+
         function generateUrl() {
             const baseUrl = document.getElementById("baseUrl").value;
             const param1 = document.getElementById("param1").value;
