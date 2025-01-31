@@ -14,16 +14,18 @@
 
     <h2>Generate URL</h2>
     <input type="text" id="baseUrl" placeholder="Enter Base URL" value="https://example.com"><br>
-    <input type="text" id="param1" placeholder="Parameter 1"><br>
-    <input type="text" id="param2" placeholder="Parameter 2"><br>
+    <input type="text" id="param1" placeholder="API KEY"><br>
+    <input type="text" id="param2" placeholder="STUDY ID"><br>
     
     <!-- Toggle Button for Param3 -->
     <button id="toggleParam3" class="toggle-btn" onclick="toggleParam3()">TUG</button>
     <input type="hidden" id="param3" value="TUG"><br>
 
-    <input type="text" id="param4" placeholder="Parameter 4"><br>
-    <input type="text" id="param5" placeholder="Parameter 5"><br>
-    <input type="text" id="param6" placeholder="Parameter 6"><br>
+    <input type="text" id="param4" placeholder="width" value="400"><br>
+    <input type="text" id="param5" placeholder="height" value="1000"><br>
+    <input type="text" id="param6" placeholder="number of Trials" value="1"><br>
+    <input type="text" id="param7" placeholder="PARTICIPANT ID"><br>
+    <input type="text" id="param8" placeholder="COLLECTION DURATION (ms)"><br>
     <button onclick="generateUrl()">Generate URL</button>
     <button onclick="copyUrl()">Copy URL</button>
 
@@ -46,21 +48,26 @@
 
         function generateUrl() {
             const baseUrl = document.getElementById("baseUrl").value;
-            const param1 = document.getElementById("param1").value;
-            const param2 = document.getElementById("param2").value;
-            const param3 = document.getElementById("param3").value;
-            const param4 = document.getElementById("param4").value;
-            const param5 = document.getElementById("param5").value;
-            const param6 = document.getElementById("param6").value;
-            
+            const param1 = document.getElementById("param1").value; //param1 is now api_key
+            const param2 = document.getElementById("param2").value; //param2 is now study_id
+            const param3 = document.getElementById("param3").value; //param3 is now session_id
+            const param4 = document.getElementById("param4").value; //param4 is now width
+            const param5 = document.getElementById("param5").value; //param5 is now height
+            const param6 = document.getElementById("param6").value; //param6 is now number_of_trials
+            const param7 = document.getElementById("param7").value; //param7 is now participant_id
+            const param8 = document.getElementById("param8").value; //param8 is now collection_duration_ms
+
+
             const url = new URL(baseUrl);
-            if (param1) url.searchParams.append("param1", param1);
-            if (param2) url.searchParams.append("param2", param2);
-            if (param3) url.searchParams.append("param3", param3);
-            if (param4) url.searchParams.append("param4", param4);
-            if (param5) url.searchParams.append("param5", param5);
-            if (param6) url.searchParams.append("param6", param6);
-            
+            if (param1) url.searchParams.append("api_key", param1);
+            if (param2) url.searchParams.append("study_id", param2);
+            if (param3) url.searchParams.append("session_id", param3);
+            if (param4) url.searchParams.append("width", param4);
+            if (param5) url.searchParams.append("height", param5);
+            if (param6) url.searchParams.append("number_of_trials", param6);
+            if (param7) url.searchParams.append("participant_id", param7);
+            if (param8) url.searchParams.append("collection_duration_ms", param8);
+
             document.getElementById("output").innerText = url.toString();
         }
 
