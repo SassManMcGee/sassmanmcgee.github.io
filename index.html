@@ -1,7 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input, button { margin: 10px; padding: 10px; font-size: 16px; width: 90%; max-width: 400px; }
+        #output { font-weight: bold; word-break: break-all; margin-top: 10px; }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+    <h2>Generate URL</h2>
+    <input type="text" id="baseUrl" placeholder="Enter Base URL" value="https://example.com"><br>
+    <input type="text" id="param1" placeholder="Parameter 1"><br>
+    <input type="text" id="param2" placeholder="Parameter 2"><br>
+    <button onclick="generateUrl()">Generate URL</button>
+    <button onclick="copyUrl()">Copy URL</button>
+
+    <p id="output">Generated URL will appear here...</p>
+
+    <script>
+        function generateUrl() {
+            const baseUrl = document.getElementById("baseUrl").value;
+            const param1 = document.getElementById("param1").value;
+            const param2 = document.getElementById("param2").value;
+            
+            const url = new URL(baseUrl);
+            if (param1) url.searchParams.append("param1", param1);
+            if (param2) url.searchParams.append("param2", param2);
+            
+            document.getElementById("output").innerText = url.toString();
+        }
+
+        function copyUrl() {
+            const text = document.getElementById("output").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("URL copied!");
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
+
 </body>
 </html>
