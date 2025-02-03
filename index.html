@@ -48,26 +48,33 @@
 
         function generateUrl() {
             const baseUrl = document.getElementById("baseUrl").value;
-            const param1 = document.getElementById("param1").value; //param1 is now api_key
-            const param2 = document.getElementById("param2").value; //param2 is now study_id
-            const param3 = document.getElementById("param3").value; //param3 is now session_id
-            const param4 = document.getElementById("param4").value; //param4 is now width
-            const param5 = document.getElementById("param5").value; //param5 is now height
-            const param6 = document.getElementById("param6").value; //param6 is now number_of_trials
-            const param7 = document.getElementById("param7").value; //param7 is now participant_id
-            const param8 = document.getElementById("param8").value; //param8 is now collection_duration_ms
+            const params = new URLSearchParams();
 
-            const url = new URL(baseUrl);
-            if (param1) url.searchParams.append("api_key", param1);
-            if (param2) url.searchParams.append("study_id", param2);
-            if (param3) url.searchParams.append("session_id", param3);
-            if (param4) url.searchParams.append("width", param4);
-            if (param5) url.searchParams.append("height", param5);
-            if (param6) url.searchParams.append("number_of_trials", param6);
-            if (param7) url.searchParams.append("participant_id", param7);
-            if (param8) url.searchParams.append("collection_duration_ms", encodeURIComponent(param8)); //Including the "::" rather than changing
+            const param1 = document.getElementById("param1").value; // param1 is now api_key
+            const param2 = document.getElementById("param2").value; // param2 is now study_id
+            const param3 = document.getElementById("param3").value; // param3 is now session_id
+            const param4 = document.getElementById("param4").value; // param4 is now width
+            const param5 = document.getElementById("param5").value; // param5 is now height
+            const param6 = document.getElementById("param6").value; // param6 is now number_of_trials
+            const param7 = document.getElementById("param7").value; // param7 is now participant_id
+            const param8 = document.getElementById("param8").value; // param8 is now collection_duration_ms
 
-            document.getElementById("output").innerText = url.toString();
+            if (param1) params.append("api_key", param1);
+            if (param2) params.append("study_id", param2);
+            if (param3) params.append("session_id", param3);
+            if (param4) params.append("width", param4);
+            if (param5) params.append("height", param5);
+            if (param6) params.append("number_of_trials", param6);
+            if (param7) params.append("participant_id", param7);
+
+            let finalUrl = baseUrl + "?" + params.toString();
+
+            // Manually append param8 to prevent encoding "::"
+            if (param8) {
+                finalUrl += `&collection_duration_ms=${param8}`;
+            }
+
+            document.getElementById("output").innerText = finalUrl;
         }
 
         function copyUrl() {
@@ -82,3 +89,4 @@
 
 </body>
 </html>
+
