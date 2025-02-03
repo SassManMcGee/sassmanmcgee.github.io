@@ -25,7 +25,7 @@
     <input type="text" id="param5" placeholder="height" value="1000"><br>
     <input type="text" id="param6" placeholder="number of Trials" value="1"><br>
     <input type="text" id="param7" placeholder="PARTICIPANT ID"><br>
-    <input type="text" id="param8" placeholder="COLLECTION DURATION (ms)"value="240000::int"><br>
+    <input type="text" id="param8" placeholder="COLLECTION DURATION (ms)" value="240000::int"><br>
     <button onclick="generateUrl()">Generate URL</button>
     <button onclick="copyUrl()">Copy URL</button>
 
@@ -57,7 +57,6 @@
             const param7 = document.getElementById("param7").value; //param7 is now participant_id
             const param8 = document.getElementById("param8").value; //param8 is now collection_duration_ms
 
-
             const url = new URL(baseUrl);
             if (param1) url.searchParams.append("api_key", param1);
             if (param2) url.searchParams.append("study_id", param2);
@@ -66,7 +65,7 @@
             if (param5) url.searchParams.append("height", param5);
             if (param6) url.searchParams.append("number_of_trials", param6);
             if (param7) url.searchParams.append("participant_id", param7);
-            if (param8) url.searchParams.append("collection_duration_ms", param8);
+            if (param8) url.searchParams.append("collection_duration_ms", encodeURIComponent(param8)); //Including the "::" rather than changing
 
             document.getElementById("output").innerText = url.toString();
         }
