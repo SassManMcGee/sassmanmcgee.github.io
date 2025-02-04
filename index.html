@@ -26,6 +26,10 @@
     <input type="text" id="param6" placeholder="number of Trials" value="1"><br>
     <input type="text" id="param7" placeholder="PARTICIPANT ID"><br>
     <input type="text" id="param8" placeholder="COLLECTION DURATION (ms)" value="240000::int"><br>
+    <input type="text" id="param9" placeholder="INSTRUCTIONS TEXT"><br>
+    <input type="text" id="param10" placeholder="PROMPT TEXT"><br>
+    <input type="text" id="param11" placeholder="TRIALS COMPLETE SCENE TEXT"><br>
+
     <button onclick="generateUrl()">Generate URL</button>
     <button onclick="copyUrl()">Copy URL</button>
 
@@ -50,14 +54,17 @@
             const baseUrl = document.getElementById("baseUrl").value;
             const params = new URLSearchParams();
 
-            const param1 = document.getElementById("param1").value; // param1 is now api_key
-            const param2 = document.getElementById("param2").value; // param2 is now study_id
-            const param3 = document.getElementById("param3").value; // param3 is now session_id
-            const param4 = document.getElementById("param4").value; // param4 is now width
-            const param5 = document.getElementById("param5").value; // param5 is now height
-            const param6 = document.getElementById("param6").value; // param6 is now number_of_trials
-            const param7 = document.getElementById("param7").value; // param7 is now participant_id
-            const param8 = document.getElementById("param8").value; // param8 is now collection_duration_ms
+            const param1 = document.getElementById("param1").value; // api_key
+            const param2 = document.getElementById("param2").value; // study_id
+            const param3 = document.getElementById("param3").value; // session_id
+            const param4 = document.getElementById("param4").value; // width
+            const param5 = document.getElementById("param5").value; // height
+            const param6 = document.getElementById("param6").value; // number_of_trials
+            const param7 = document.getElementById("param7").value; // participant_id
+            const param8 = document.getElementById("param8").value; // collection_duration_ms
+            const param9 = document.getElementById("param9").value; // instructions_text
+            const param10 = document.getElementById("param10").value; // prompt_text
+            const param11 = document.getElementById("param11").value; // trials_complete_scene_text
 
             if (param1) params.append("api_key", param1);
             if (param2) params.append("study_id", param2);
@@ -67,12 +74,16 @@
             if (param6) params.append("number_of_trials", param6);
             if (param7) params.append("participant_id", param7);
 
-            let finalUrl = baseUrl + "?" + params.toString();
-
             // Manually append param8 to prevent encoding "::"
+            let finalUrl = baseUrl + "?" + params.toString();
             if (param8) {
                 finalUrl += `&collection_duration_ms=${param8}`;
             }
+
+            // Encode the new text parameters to ensure proper URL formatting
+            if (param9) finalUrl += `&instructions_text=${encodeURIComponent(param9)}`;
+            if (param10) finalUrl += `&prompt_text=${encodeURIComponent(param10)}`;
+            if (param11) finalUrl += `&trials_complete_scene_text=${encodeURIComponent(param11)}`;
 
             document.getElementById("output").innerText = finalUrl;
         }
@@ -89,4 +100,5 @@
 
 </body>
 </html>
+
 
